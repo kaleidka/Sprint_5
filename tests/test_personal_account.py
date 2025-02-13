@@ -1,20 +1,8 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from data import CONSTRUCTOR_HEADER, PERSONAL_ACCOUNT_TEXT, SIGN_IN_FORM_TITLE
 from locators import Locators as loc
+from base_page import BasePage
 
-class TestPersonalAccount:
-
-    def click_element(self, driver, element_locator):
-        driver.find_element(*element_locator).click()
-
-    def wait_for_element(self, driver, element_locator, timeout=5):
-        WebDriverWait(driver, timeout).until(
-            EC.presence_of_element_located(element_locator)
-        )
-
-    def get_element_text(self, driver, element_locator):
-        return driver.find_element(*element_locator).text
+class TestPersonalAccount(BasePage):
 
     def test_enter_account_with_account_link(self, driver, log_in):
         self.click_element(driver, loc.ACCOUNT_LINK)

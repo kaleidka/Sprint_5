@@ -1,20 +1,8 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from data import EMAIL, PASSWORD
 from locators import Locators as loc
+from base_page import BasePage
 
-class TestSignIn:
-
-    def click_element(self, driver, element_locator):
-        driver.find_element(*element_locator).click()
-
-    def send_keys_to_element(self, driver, element_locator, keys):
-        driver.find_element(*element_locator).send_keys(keys)
-
-    def wait_for_element(self, driver, element_locator, timeout=5):
-        WebDriverWait(driver, timeout).until(
-            EC.presence_of_element_located(element_locator)
-        )
+class TestSignIn(BasePage):
 
     def button_after_log_in(self, driver):
         self.send_keys_to_element(driver, loc.SIGN_IN_EMAIL_INPUT, EMAIL)

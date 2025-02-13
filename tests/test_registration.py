@@ -1,24 +1,10 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from data import INVALID_PASSWORD, USER_NAME, WARNING
 from locators import Locators as loc
+from base_page import BasePage
 
-class TestRegistration:
+class TestRegistration(BasePage):
 
-    def click_element(self, driver, element_locator):
-        driver.find_element(*element_locator).click()
-
-    def send_keys_to_element(self, driver, element_locator, keys):
-        driver.find_element(*element_locator).send_keys(keys)
-
-    def wait_for_element(self, driver, element_locator, timeout=5):
-        WebDriverWait(driver, timeout).until(
-            EC.element_to_be_clickable(element_locator)
-        )
-
-    def test_sign_up_new_account_created(
-            self, driver, generate_login, generate_password
-          ):
+    def test_sign_up_new_account_created(self, driver, generate_login, generate_password):
         self.click_element(driver, loc.ENTER_ACCOUNT_BUTTON)
         self.click_element(driver, loc.SIGN_UP_LINK)
         self.send_keys_to_element(driver, loc.SIGN_UP_NAME_INPUT, USER_NAME)
