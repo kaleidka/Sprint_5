@@ -4,6 +4,9 @@ from data import ACTIVE
 from locators import Locators as loc
 
 class BasePage:
+    def __init__(self, driver):
+        self.driver = driver
+
     def click_element(self, driver, element_locator):
         driver.find_element(*element_locator).click()
 
