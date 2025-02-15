@@ -1,6 +1,6 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from data import ACTIVE
+from data import ACTIVE, EMAIL, PASSWORD
 from locators import Locators as loc
 
 class BasePage:
@@ -31,3 +31,10 @@ class BasePage:
         for locator in inactive_locators:
             inactive_class = self.get_element_attribute(driver, locator, 'class')
             assert ACTIVE not in inactive_class
+
+    def button_after_log_in(self, driver):
+        self.send_keys_to_element(driver, loc.SIGN_IN_EMAIL_INPUT, EMAIL)
+        self.send_keys_to_element(driver, loc.SIGN_IN_PASSWORD_INPUT, PASSWORD)
+        self.click_element(driver, loc.SIGN_IN_BUTTON)
+        self.wait_for_element(driver, loc.BASKET_BUTTON)
+        return self.get_element_text(driver, loc.BASKET_BUTTON)
